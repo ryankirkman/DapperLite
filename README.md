@@ -1,9 +1,9 @@
 DapperLite - a very simple object mapper for .Net & .NetCF
 ==========================================================
 
-A Dapper compatible library that works on the .NET Compact Framework.
+A Dapper compatible library that works on .NET Compact Framework as well as normal .NET.
 
-For more thorough documentation please see: https://github.com/SamSaffron/dapper-dot-net
+This project is a subset and simplification of dapper-dot-net: https://github.com/SamSaffron/dapper-dot-net
 
 Currently provides 2 helpers:
 
