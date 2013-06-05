@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperLite.NETCF35", "DapperLite.NETCF35\DapperLite.NETCF35.csproj", "{09D9515E-EAA8-4068-A36D-9EA3DF684CE0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09D9515E-EAA8-4068-A36D-9EA3DF684CE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D9515E-EAA8-4068-A36D-9EA3DF684CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D9515E-EAA8-4068-A36D-9EA3DF684CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D9515E-EAA8-4068-A36D-9EA3DF684CE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
