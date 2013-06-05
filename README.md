@@ -3,7 +3,7 @@ DapperLite - a very simple object mapper for .Net & .NetCF
 
 Features
 --------
-DapperLite is a [single file](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapper.cs) you can drop in to your .NETCF or .NET project that will extend your IDbConnection interface.
+DapperLite is a [single file](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapper.cs) you can drop in to your .NET Compact Framework or .NET project that will extend your IDbConnection interface.
 
 This project is a subset and simplification of dapper-dot-net: https://github.com/SamSaffron/dapper-dot-net
 
