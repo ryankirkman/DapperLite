@@ -1,7 +1,9 @@
 DapperLite - a very simple object mapper for .Net & .NetCF
 ==========================================================
 
-A Dapper compatible library that works on .NET Compact Framework as well as normal .NET.
+Features
+--------
+DapperLite is a [single file](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapper.cs) you can drop in to your .NETCF or .NET project that will extend your IDbConnection interface.
 
 This project is a subset and simplification of dapper-dot-net: https://github.com/SamSaffron/dapper-dot-net
 
@@ -67,6 +69,8 @@ connection.Execute(@"
 
 Using the Micro-ORM Database.cs class
 -------------------------------------
+
+To use this Micro-ORM, in addition to [SqlMapper.cs](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapper.cs) you will also need to include [SqlMapperInsertUpdate.cs](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapperInsertUpdate.cs), [Database.cs](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/Database.cs) and [SqlCeDatabase.cs](https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlCeDatabase.cs). These are all extremely simple files and worth reading if you'd like to modify their functionality.
 
 ```csharp
 // Basic constructor.
