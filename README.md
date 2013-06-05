@@ -103,18 +103,26 @@ SqlCeConnection conn = new SqlCeConnection("Data Source=MyDatabase.sdf");
 
 // The type we pass in (Guid) is the type of the Id column that is assumed to be present in every table.
 SqlCeDatabase<Guid> db = new SqlCeDatabase<Guid>(conn);
+// Calling Init() automatically generates a table name map, used to map type names to table names.
 db.Init();
 
+// Get all Dogs.
 IEnumerable<Dog> allDogs = db.All<Dog>();
 
+// Get all Dogs where Size == "big"
 IEnumerable<Dog> bigDogs = db.All<Dog>("Size", "big");
 
+// Get a dog by Id
 Dog myDog = db.Get<Dog>(someGuid);
 
+// Insert a new Dog
 Dog newDog = new Dog { Age = 3, Id = Guid.New(), Name = "Ralph", Weight = 12.3, Size = "Small" };
 db.Insert(newDog);
 
+// Get the Dog with Name == "Fido"
 Dog yourDog = db.Get<Dog>("Name", "Fido");
+
+// Update a Dog
 yourDog.Size = "Small";
 db.Update(yourDog);
 ```
