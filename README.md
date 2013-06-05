@@ -104,6 +104,7 @@ SqlCeConnection conn = new SqlCeConnection("Data Source=MyDatabase.sdf");
 // The type we pass in (Guid) is the type of the Id column that is assumed to be present in every table.
 SqlCeDatabase<Guid> db = new SqlCeDatabase<Guid>(conn);
 // Calling Init() automatically generates a table name map, used to map type names to table names.
+// e.g. for the type "Dog", it will first search for a table name == "Dog", then (pluralized) "Dogs"
 db.Init();
 
 // Get all Dogs.
