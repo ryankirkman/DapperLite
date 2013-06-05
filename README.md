@@ -97,7 +97,7 @@ Example usage:
 ```csharp
 SqlCeConnection conn = new SqlCeConnection("Data Source=MyDatabase.sdf");
 
-// The type we pass in (int) is the type of the Id column that is assumed to be present in every table.
+// The type we pass in (Guid) is the type of the Id column that is assumed to be present in every table.
 SqlCeDatabase<Guid> db = new SqlCeDatabase<Guid>(conn);
 db.Init();
 
