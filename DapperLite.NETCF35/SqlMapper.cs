@@ -129,10 +129,10 @@ namespace DapperLite
                 {
                     if (reader == null) return list;
 
-                    while (reader.Read())
+                    Type type = typeof(T);
+                    if (type.IsValueType || type == typeof(string))
                     {
-                        Type type = typeof(T);
-                        if (type.IsValueType || type == typeof(string))
+                        while (reader.Read())
                         {
                             if (reader.IsDBNull(0)) // Handles the case where the value is null.
                             {
@@ -143,13 +143,15 @@ namespace DapperLite
                                 list.Add((T)reader[0]);
                             }
                         }
-                        else
+                    }
+                    else // Reference types
+                    {
+                        while (reader.Read())
                         {
                             T record = Activator.CreateInstance<T>();
                             PopulateClass(record, reader);
                             list.Add(record);
                         }
-
                     }
 
                     return list;
