@@ -74,31 +74,25 @@ namespace DapperLite
             foreach (string columnName in GetColumnNames(reader))
             {
                 string colName = columnName;
+                object value = reader[colName];
                 PropertyInfo pi = p.FirstOrDefault(x => x.Name == colName);
 
-                // Skip setting a value if we have a null value in the result set
-                if (pi == null || reader[colName] == DBNull.Value) continue;
+                if (pi == null || value == DBNull.Value) continue;
 
-                object o = reader[colName];
+                Type columnType = value.GetType();
+                Type actualType = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
 
-                Type actualType = IsNullableType(pi.PropertyType) ? Nullable.GetUnderlyingType(pi.PropertyType) : pi.PropertyType;
-
-                if (actualType != typeof(string) && actualType != typeof(int))
+                // Check for a directly assignable type
+                if (actualType == columnType || actualType == typeof(string) || actualType == typeof(int))
                 {
-                    // Get the Parse method of the type we are trying to assign to if it isn't a value type
-                    o = pi.PropertyType.GetMethod("Parse", new[] { typeof(string) }).Invoke(null, new[] { o });
+                    pi.SetValue(objectClass, value, null);
                 }
-
-                pi.SetValue(objectClass, o, null);
+                else
+                {
+                    value = pi.PropertyType.GetMethod("Parse", new[] { typeof(string) }).Invoke(null, new[] { value });
+                    pi.SetValue(objectClass, value, null);
+                }
             }
-        }
-
-        /// <summary>
-        /// Based on the code described at: http://msdn.microsoft.com/en-us/library/ms366789(v=vs.100).aspx
-        /// </summary>
-        private static bool IsNullableType(Type type)
-        {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         /// <summary>
