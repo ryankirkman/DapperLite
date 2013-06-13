@@ -76,11 +76,29 @@ namespace DapperLite
                 string colName = columnName;
                 PropertyInfo pi = p.FirstOrDefault(x => x.Name == colName);
 
-                if (pi != null && reader[colName] != DBNull.Value)
+                // Skip setting a value if we have a null value in the result set
+                if (pi == null || reader[colName] == DBNull.Value) continue;
+
+                object o = reader[colName];
+
+                Type actualType = IsNullableType(pi.PropertyType) ? Nullable.GetUnderlyingType(pi.PropertyType) : pi.PropertyType;
+
+                if (actualType != typeof(string) && actualType != typeof(int))
                 {
-                    pi.SetValue(objectClass, reader[colName], null);
+                    // Get the Parse method of the type we are trying to assign to if it isn't a value type
+                    o = pi.PropertyType.GetMethod("Parse", new[] { typeof(string) }).Invoke(null, new[] { o });
                 }
+
+                pi.SetValue(objectClass, o, null);
             }
+        }
+
+        /// <summary>
+        /// Based on the code described at: http://msdn.microsoft.com/en-us/library/ms366789(v=vs.100).aspx
+        /// </summary>
+        private static bool IsNullableType(Type type)
+        {
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         /// <summary>
