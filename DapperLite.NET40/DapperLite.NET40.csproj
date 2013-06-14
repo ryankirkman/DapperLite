@@ -34,6 +34,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite.NET40">
+      <HintPath>..\lib\System.Data.SQLite.NET40.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +53,9 @@
     </Compile>
     <Compile Include="..\DapperLite.NETCF35\SqlCeDatabase.cs">
       <Link>SqlCeDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\DapperLite.NETCF35\SqliteDatabase.cs">
+      <Link>SqliteDatabase.cs</Link>
     </Compile>
     <Compile Include="..\DapperLite.NETCF35\SqlMapper.cs">
       <Link>SqlMapper.cs</Link>
