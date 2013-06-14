@@ -89,7 +89,7 @@ namespace DapperLite
                 }
                 else
                 {
-                    value = pi.PropertyType.GetMethod("Parse", new[] { typeof(string) }).Invoke(null, new[] { value });
+                    value = actualType.GetMethod("Parse", new[] { typeof(string) }).Invoke(null, new[] { value });
                     pi.SetValue(objectClass, value, null);
                 }
             }
