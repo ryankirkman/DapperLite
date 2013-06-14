@@ -43,7 +43,7 @@ namespace DapperLite
         }
 
         /// <summary>
-        /// This method must be called 
+        /// This method must be called to initialize the table name map, used to map type names to table names.
         /// </summary>
         public void Init()
         {
