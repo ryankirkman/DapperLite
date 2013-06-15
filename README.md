@@ -1,5 +1,5 @@
-DapperLite - a very simple object mapper for .NET & .NET Compact Framework
-==========================================================================
+DapperLite - a very simple object mapper for .NET, .NET Compact Framework and Mono
+==================================================================================
 
 Features
 --------
