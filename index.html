@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Dapperlite : A Dapper compatible library that works on .NET Compact Framework" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Dapperlite</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ryankirkman/DapperLite">View on GitHub</a>
+
+          <h1 id="project_title">Dapperlite</h1>
+          <h2 id="project_tagline">A Dapper compatible library that works on .NET Compact Framework</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ryankirkman/DapperLite/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ryankirkman/DapperLite/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="dapperlite---a-very-simple-object-mapper-for-net-net-compact-framework-and-mono" class="anchor" href="#dapperlite---a-very-simple-object-mapper-for-net-net-compact-framework-and-mono"><span class="octicon octicon-link"></span></a>DapperLite - a very simple object mapper for .NET, .NET Compact Framework and Mono</h1>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<p>DapperLite is a <a href="https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapper.cs">single file</a> you can drop in to your .NET Compact Framework or .NET project that will extend your IDbConnection interface.</p>
+
+<p>This project is a subset and simplification of dapper-dot-net: <a href="https://github.com/SamSaffron/dapper-dot-net">https://github.com/SamSaffron/dapper-dot-net</a></p>
+
+<p>Currently provides 2 helpers:</p>
+
+<h2>
+<a name="execute-a-query-and-map-the-results-to-a-strongly-typed-list" class="anchor" href="#execute-a-query-and-map-the-results-to-a-strongly-typed-list"><span class="octicon octicon-link"></span></a>Execute a query and map the results to a strongly typed List</h2>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">Query</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">IDbConnection</span> <span class="n">cnn</span><span class="p">,</span> <span class="kt">string</span> <span class="n">sql</span><span class="p">,</span> <span class="kt">object</span> <span class="n">param</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">Query</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">IDbConnection</span> <span class="n">conn</span><span class="p">,</span> <span class="kt">string</span> <span class="n">sql</span><span class="p">)</span>
+</pre></div>
+
+<p>Example usage:</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">Dog</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int?</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="n">Guid</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">float?</span> <span class="n">Weight</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Size</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>            
+
+<span class="kt">var</span> <span class="n">guid</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">dog</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;(</span><span class="s">"select Age = @Age, Id = @Id"</span><span class="p">,</span> <span class="k">new</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int?</span><span class="p">)</span><span class="k">null</span><span class="p">,</span> <span class="n">Id</span> <span class="p">=</span> <span class="n">guid</span> <span class="p">});</span>
+
+<span class="n">dog</span><span class="p">.</span><span class="n">Count</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">IsEqualTo</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+
+<span class="n">dog</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">Age</span>
+    <span class="p">.</span><span class="n">IsNull</span><span class="p">();</span>
+
+<span class="n">dog</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">Id</span>
+    <span class="p">.</span><span class="n">IsEqualTo</span><span class="p">(</span><span class="n">guid</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="execute-a-command-that-returns-no-results" class="anchor" href="#execute-a-command-that-returns-no-results"><span class="octicon octicon-link"></span></a>Execute a Command that returns no results</h2>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">this</span> <span class="n">IDbConnection</span> <span class="n">cnn</span><span class="p">,</span> <span class="kt">string</span> <span class="n">sql</span><span class="p">,</span> <span class="kt">object</span> <span class="n">param</span><span class="p">,</span> <span class="n">IDbTransaction</span> <span class="n">transaction</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">this</span> <span class="n">IDbConnection</span> <span class="n">cnn</span><span class="p">,</span> <span class="kt">string</span> <span class="n">sql</span><span class="p">)</span>
+</pre></div>
+
+<p>Example usage:</p>
+
+<div class="highlight"><pre><span class="n">connection</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="s">@"</span>
+<span class="s">  set nocount on </span>
+<span class="s">  create table #t(i int) </span>
+<span class="s">  set nocount off </span>
+<span class="s">  insert #t </span>
+<span class="s">  select @a a union all select @b </span>
+<span class="s">  set nocount on </span>
+<span class="s">  drop table #t"</span><span class="p">,</span> <span class="k">new</span> <span class="p">{</span><span class="n">a</span><span class="p">=</span><span class="m">1</span><span class="p">,</span> <span class="n">b</span><span class="p">=</span><span class="m">2</span> <span class="p">})</span>
+   <span class="p">.</span><span class="n">IsEqualTo</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="using-the-micro-orm-databasecs-class" class="anchor" href="#using-the-micro-orm-databasecs-class"><span class="octicon octicon-link"></span></a>Using the Micro-ORM Database.cs class</h2>
+
+<p>To use this Micro-ORM, in addition to <a href="https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapper.cs">SqlMapper.cs</a> you will also need to include <a href="https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlMapperInsertUpdate.cs">SqlMapperInsertUpdate.cs</a>, <a href="https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/Database.cs">Database.cs</a> and <a href="https://github.com/ryankirkman/DapperLite/blob/master/DapperLite.NETCF35/SqlCeDatabase.cs">SqlCeDatabase.cs</a>. These are all extremely simple files and worth reading if you'd like to modify their functionality.</p>
+
+<div class="highlight"><pre><span class="c1">// Basic constructor.</span>
+<span class="k">protected</span> <span class="nf">Database</span><span class="p">(</span><span class="n">IDbConnection</span> <span class="n">connection</span><span class="p">)</span>
+
+<span class="c1">// Provides advanced configuration for the behaviour of the class when Exceptions are encountered.</span>
+<span class="k">protected</span> <span class="nf">Database</span><span class="p">(</span><span class="n">IDbConnection</span> <span class="n">connection</span><span class="p">,</span> <span class="n">DapperLiteException</span> <span class="n">exceptionHandler</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">throwExceptions</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="n">T</span> <span class="n">Get</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">TId</span> <span class="n">id</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="n">T</span> <span class="n">Get</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">columnName</span><span class="p">,</span> <span class="kt">object</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">All</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
+
+<span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">All</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">columnName</span><span class="p">,</span> <span class="kt">object</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">object</span> <span class="n">obj</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="nf">Update</span><span class="p">(</span><span class="kt">object</span> <span class="n">obj</span><span class="p">)</span>
+
+<span class="c1">// Also includes wrapper methods for Query&lt;T&gt;() and Execute() to save typing.</span>
+</pre></div>
+
+<p><code>Database.cs</code> is an abstract class designed to be extended with SQL version specific implementations. An <code>SqlCeDatabase</code> implementation is provided.</p>
+
+<p>Example usage:</p>
+
+<div class="highlight"><pre><span class="n">SqlCeConnection</span> <span class="n">conn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SqlCeConnection</span><span class="p">(</span><span class="s">"Data Source=MyDatabase.sdf"</span><span class="p">);</span>
+
+<span class="c1">// The type we pass in (Guid) is the type of the Id column that is assumed to be present in every table.</span>
+<span class="n">SqlCeDatabase</span><span class="p">&lt;</span><span class="n">Guid</span><span class="p">&gt;</span> <span class="n">db</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SqlCeDatabase</span><span class="p">&lt;</span><span class="n">Guid</span><span class="p">&gt;(</span><span class="n">conn</span><span class="p">);</span>
+<span class="c1">// Calling Init() automatically generates a table name map, used to map type names to table names.</span>
+<span class="c1">// e.g. for the type "Dog", it will first search for a table name == "Dog", then (pluralized) "Dogs"</span>
+<span class="n">db</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+
+<span class="c1">// Get all Dogs.</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;</span> <span class="n">allDogs</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">All</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;();</span>
+
+<span class="c1">// Get all Dogs where Size == "big"</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;</span> <span class="n">bigDogs</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">All</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;(</span><span class="s">"Size"</span><span class="p">,</span> <span class="s">"big"</span><span class="p">);</span>
+
+<span class="c1">// Get a dog by Id</span>
+<span class="n">Dog</span> <span class="n">myDog</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Get</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;(</span><span class="n">someGuid</span><span class="p">);</span>
+
+<span class="c1">// Insert a new Dog</span>
+<span class="n">Dog</span> <span class="n">newDog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dog</span> <span class="p">{</span> <span class="n">Age</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span> <span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">New</span><span class="p">(),</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">"Ralph"</span><span class="p">,</span> <span class="n">Weight</span> <span class="p">=</span> <span class="m">12.3</span><span class="p">,</span> <span class="n">Size</span> <span class="p">=</span> <span class="s">"Small"</span> <span class="p">};</span>
+<span class="n">db</span><span class="p">.</span><span class="n">Insert</span><span class="p">(</span><span class="n">newDog</span><span class="p">);</span>
+
+<span class="c1">// Get the Dog with Name == "Fido"</span>
+<span class="n">Dog</span> <span class="n">yourDog</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Get</span><span class="p">&lt;</span><span class="n">Dog</span><span class="p">&gt;(</span><span class="s">"Name"</span><span class="p">,</span> <span class="s">"Fido"</span><span class="p">);</span>
+
+<span class="c1">// Update a Dog</span>
+<span class="n">yourDog</span><span class="p">.</span><span class="n">Size</span> <span class="p">=</span> <span class="s">"Small"</span><span class="p">;</span>
+<span class="n">db</span><span class="p">.</span><span class="n">Update</span><span class="p">(</span><span class="n">yourDog</span><span class="p">);</span>
+</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Dapperlite maintained by <a href="https://github.com/ryankirkman">ryankirkman</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
