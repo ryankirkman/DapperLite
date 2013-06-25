@@ -7,14 +7,15 @@ DapperLite is a [single file](https://github.com/ryankirkman/DapperLite/blob/mas
 
 This project is a subset and simplification of dapper-dot-net: https://github.com/SamSaffron/dapper-dot-net
 
-Currently provides 2 helpers:
-
 Alternatives
 ------------
 Some other similar projects are:
 * [Dapper](https://github.com/SamSaffron/dapper-dot-net)
 * [Massive](https://github.com/robconery/massive)
 * [PetaPoco](http://www.toptensoftware.com/petapoco/)
+
+How to Use
+==========
 
 Execute a query and map the results to a strongly typed List
 ------------------------------------------------------------
