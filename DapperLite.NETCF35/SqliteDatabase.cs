@@ -13,10 +13,6 @@ namespace DapperLite
 		{
 		}
 
-		/// <summary>
-		/// This query is specific to SQLCE 3.5 at the time of writing.
-		/// A similar query can be used for SQL Server.
-		/// </summary>
 		protected override Dictionary<string, string> GetTableNameMap()
 		{
 			const string sql = @"
