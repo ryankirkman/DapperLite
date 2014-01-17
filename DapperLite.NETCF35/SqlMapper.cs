@@ -83,7 +83,7 @@ namespace DapperLite
                 Type actualType = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
 
                 // Check for a directly assignable type
-                if (actualType == columnType || actualType == typeof(string) || actualType == typeof(int))
+                if (actualType.Equals(columnType))
                 {
                     pi.SetValue(objectClass, value, null);
                 }
