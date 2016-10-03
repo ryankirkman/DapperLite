@@ -22,7 +22,7 @@ namespace DapperLite
             int result = connection.Execute(sql, param, transaction);
 
             if (result <= 0)
-                throw new ApplicationException("Return value of INSERT should be greater than 0. An erorr has occurred with the INSERT.");
+                throw new ApplicationException("Return value of INSERT should be greater than 0. An error has occurred with the INSERT.");
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace DapperLite
             int result = connection.Execute(sql, param, transaction);
 
             if (result <= 0)
-                throw new ApplicationException("Return value of UPDATE should be greater than 0. An erorr has occurred with the INSERT.");
+                throw new ApplicationException("Return value of UPDATE should be greater than 0. An error has occurred with the INSERT.");
         }
     }
 }
